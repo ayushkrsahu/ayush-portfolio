@@ -1,6 +1,7 @@
 import React from 'react';
 import { Linkedin, User, Edit3, Github, Sun, Moon } from 'lucide-react';
 import { UserProfile } from '../types';
+import { toSafeExternalUrl } from '../utils/safeLinks';
 
 interface HeaderProps {
   profile: UserProfile;
@@ -17,13 +18,16 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenProfile,
   onOpenEditProfile
 }) => {
+  const linkedInUrl = toSafeExternalUrl(profile.linkedinUrl);
+  const githubUrl = toSafeExternalUrl(profile.githubUrl);
+
   return (
     <header id="portfolio-header" className="w-full bg-white/95 dark:bg-slate-900/90 border-b border-slate-100 dark:border-slate-800/80 py-6 px-6 sm:px-12 md:px-20 transition-colors duration-300 sticky top-0 z-30 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Left Link */}
         <div className="flex items-center space-x-4">
           <a
-            href={profile.linkedinUrl}
+            href={linkedInUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="text-slate-500 dark:text-slate-400 hover:text-[#3B6982] dark:hover:text-sky-300 transition-colors text-sm font-normal tracking-[0.2em] lowercase flex items-center gap-1.5"
@@ -33,7 +37,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span>linkedin</span>
           </a>
           <a
-            href={profile.githubUrl}
+            href={githubUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:flex items-center gap-1.5 text-slate-400 dark:text-slate-400 hover:text-[#3B6982] dark:hover:text-sky-300 transition-colors text-sm font-normal tracking-[0.2em] lowercase"
@@ -87,4 +91,3 @@ export const Header: React.FC<HeaderProps> = ({
     </header>
   );
 };
-

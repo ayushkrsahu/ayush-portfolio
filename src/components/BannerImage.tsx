@@ -1,6 +1,7 @@
 import React from "react";
-import { UserProfile } from "@/src/types";
+import { UserProfile } from '../types';
 import { Mail, Linkedin, Github } from "lucide-react";
+import { toSafeExternalUrl, toSafeMailtoUrl } from '../utils/safeLinks';
 
 interface BannerImageProps {
   profile: UserProfile;
@@ -8,6 +9,10 @@ interface BannerImageProps {
 }
 
 export const BannerImage: React.FC<BannerImageProps> = ({ profile }) => {
+  const linkedInUrl = toSafeExternalUrl(profile.linkedinUrl);
+  const githubUrl = toSafeExternalUrl(profile.githubUrl);
+  const mailtoUrl = toSafeMailtoUrl(profile.email);
+
   return (
     <section id="banner-section" className="w-full bg-white dark:bg-slate-950 py-2 sm:py-4 px-0 sm:px-6 md:px-12 transition-colors duration-300">
       <div className="max-w-6xl mx-auto overflow-hidden relative shadow-md rounded-none sm:rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-slate-900 group">
@@ -35,9 +40,9 @@ export const BannerImage: React.FC<BannerImageProps> = ({ profile }) => {
               </div>
             </div>
             <div className="flex items-center gap-2 pt-2 sm:pt-0 sm:ml-4 sm:border-l sm:border-slate-700 sm:pl-4">
-              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-lg bg-white/10 hover:bg-[#0A66C2] text-white transition-colors"><Linkedin className="w-4 h-4" /></a>
-              <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-lg bg-white/10 hover:bg-slate-700 text-white transition-colors"><Github className="w-4 h-4" /></a>
-              <a href={`mailto:${profile.email}`} className="p-1.5 rounded-lg bg-white/10 hover:bg-emerald-600 text-white transition-colors"><Mail className="w-4 h-4" /></a>
+              <a href={linkedInUrl} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-lg bg-white/10 hover:bg-[#0A66C2] text-white transition-colors"><Linkedin className="w-4 h-4" /></a>
+              <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-lg bg-white/10 hover:bg-slate-700 text-white transition-colors"><Github className="w-4 h-4" /></a>
+              <a href={mailtoUrl} className="p-1.5 rounded-lg bg-white/10 hover:bg-emerald-600 text-white transition-colors"><Mail className="w-4 h-4" /></a>
             </div>
           </div>
         </div>

@@ -1,12 +1,17 @@
 import React from 'react';
 import { ArrowUp, Linkedin, Github, Mail } from 'lucide-react';
 import { UserProfile } from '../types';
+import { toSafeExternalUrl, toSafeMailtoUrl } from '../utils/safeLinks';
 
 interface FooterProps {
   profile: UserProfile;
 }
 
 export const Footer: React.FC<FooterProps> = ({ profile }) => {
+  const linkedInUrl = toSafeExternalUrl(profile.linkedinUrl);
+  const githubUrl = toSafeExternalUrl(profile.githubUrl);
+  const mailtoUrl = toSafeMailtoUrl(profile.email);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -25,7 +30,7 @@ export const Footer: React.FC<FooterProps> = ({ profile }) => {
         {/* Links */}
         <div className="flex items-center space-x-6 text-xs text-slate-400">
           <a
-            href={profile.linkedinUrl}
+            href={linkedInUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition-colors flex items-center gap-1"
@@ -34,7 +39,7 @@ export const Footer: React.FC<FooterProps> = ({ profile }) => {
             <span>LinkedIn</span>
           </a>
           <a
-            href={profile.githubUrl}
+            href={githubUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition-colors flex items-center gap-1"
@@ -43,7 +48,7 @@ export const Footer: React.FC<FooterProps> = ({ profile }) => {
             <span>GitHub</span>
           </a>
           <a
-            href={`mailto:${profile.email}`}
+            href={mailtoUrl}
             className="hover:text-white transition-colors flex items-center gap-1"
           >
             <Mail className="w-3.5 h-3.5" />

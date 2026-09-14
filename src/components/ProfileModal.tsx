@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Linkedin, Github, Mail, MapPin, Send, CheckCircle2 } from 'lucide-react';
 import { UserProfile } from '../types';
+import { toSafeExternalUrl, toSafeMailtoUrl } from '../utils/safeLinks';
 
 interface ProfileModalProps {
   isOpen: boolean;
@@ -11,6 +12,9 @@ interface ProfileModalProps {
 export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose, profile }) => {
   const [msgSent, setMsgSent] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const linkedInUrl = toSafeExternalUrl(profile.linkedinUrl);
+  const githubUrl = toSafeExternalUrl(profile.githubUrl);
+  const mailtoUrl = toSafeMailtoUrl(profile.email);
 
   if (!isOpen) return null;
 
@@ -56,7 +60,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose, pro
             {/* Social Links */}
             <div className="flex items-center gap-4 pt-2">
               <a
-                href={profile.linkedinUrl}
+                href={linkedInUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-[#4A7C9D] dark:hover:bg-sky-600 hover:text-white dark:hover:text-white text-slate-700 dark:text-slate-200 text-xs font-medium transition-colors"
@@ -65,7 +69,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose, pro
                 <span>LinkedIn</span>
               </a>
               <a
-                href={profile.githubUrl}
+                href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 hover:text-white text-slate-700 dark:text-slate-200 text-xs font-medium transition-colors"
@@ -74,7 +78,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose, pro
                 <span>GitHub</span>
               </a>
               <a
-                href={`mailto:${profile.email}`}
+                href={mailtoUrl}
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-slate-700 dark:text-slate-200 text-xs font-medium transition-colors"
               >
                 <Mail className="w-3.5 h-3.5" />
