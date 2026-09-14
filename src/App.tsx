@@ -6,6 +6,7 @@ import { SkillsSection } from './components/SkillsSection';
 import { ExperienceEducationSection } from './components/ExperienceEducationSection';
 import { ProjectsSection } from './components/ProjectsSection';
 import { DashboardsSection } from './components/DashboardsSection';
+import { BlogSection } from './components/BlogSection';
 import { ProjectModal } from './components/ProjectModal';
 import { ResumeModal } from './components/ResumeModal';
 import { ProfileModal } from './components/ProfileModal';
@@ -19,7 +20,8 @@ import {
   dashboardsData,
   experienceData,
   educationData,
-  certificationsData
+  certificationsData,
+  blogPostsData
 } from './data/portfolioData';
 import { Project, UserProfile } from './types';
 
@@ -68,6 +70,13 @@ export default function App() {
     }
   };
 
+  const handleScrollToBlog = () => {
+    const el = document.getElementById('blog-section');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans antialiased selection:bg-[#4A7C9D]/20 selection:text-[#3B6982] transition-colors duration-300">
       {/* 1. Header Navigation */}
@@ -86,6 +95,7 @@ export default function App() {
         onScrollToProjects={handleScrollToProjects}
         onScrollToCertifications={handleScrollToCertifications}
         onScrollToDashboards={handleScrollToDashboards}
+        onScrollToBlog={handleScrollToBlog}
       />
 
       {/* 3. Hero Visual Profile Banner Card */}
@@ -113,7 +123,10 @@ export default function App() {
       {/* 7. Featured Power BI Dashboards & Live Analytics Links */}
       <DashboardsSection dashboards={dashboardsData} />
 
-      {/* 8. Footer */}
+      {/* 8. Technical Blog */}
+      <BlogSection posts={blogPostsData} />
+
+      {/* 9. Footer */}
       <Footer profile={profile} />
 
       {/* --- Interactive Modals --- */}

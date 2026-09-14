@@ -7,6 +7,7 @@ interface HeroProps {
   onScrollToProjects: () => void;
   onScrollToCertifications: () => void;
   onScrollToDashboards?: () => void;
+  onScrollToBlog?: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
@@ -14,7 +15,8 @@ export const Hero: React.FC<HeroProps> = ({
   onOpenResume,
   onScrollToProjects,
   onScrollToCertifications,
-  onScrollToDashboards
+  onScrollToDashboards,
+  onScrollToBlog
 }) => {
   return (
     <section id="hero-section" className="w-full bg-white dark:bg-slate-950 pt-10 pb-8 px-6 sm:px-12 text-center transition-colors duration-300">
@@ -27,7 +29,7 @@ export const Hero: React.FC<HeroProps> = ({
 
         {/* Subtitle */}
         <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm font-normal tracking-wide max-w-xl mx-auto">
-          Get to know me more through my resume, projects, dashboards and certifications.
+          Get to know me more through my resume, projects, dashboards, certifications and technical blogs.
         </p>
 
         {/* Action Pill Buttons */}
@@ -61,6 +63,15 @@ export const Hero: React.FC<HeroProps> = ({
           >
             Certifications
           </button>
+
+          {onScrollToBlog && (
+            <button
+              onClick={onScrollToBlog}
+              className="px-5 py-1.5 rounded-full border border-[#4A7C9D] dark:border-sky-500/60 text-[#4A7C9D] dark:text-sky-300 hover:bg-[#4A7C9D] dark:hover:bg-sky-600 hover:text-white dark:hover:text-white transition-all duration-200 text-xs tracking-wide font-medium cursor-pointer active:scale-95 shadow-2xs"
+            >
+              Blog
+            </button>
+          )}
         </div>
       </div>
     </section>
